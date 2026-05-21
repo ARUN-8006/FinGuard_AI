@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>
+        FinGuard AI Dashboard
+    </title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static',
+    filename='css/style.css') }}">
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- LIVE ALERT -->
+<!-- ========================= -->
+
+<div id="liveAlert">
+
+    AI Fraud Monitoring Active
+
+</div>
+
+<!-- ========================= -->
+<!-- SIDEBAR -->
+<!-- ========================= -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        FinGuard AI
+    </div>
+
+    <a href="/">
+        Home
+    </a>
+
+    <a href="/dashboard"
+    class="active">
+        Dashboard
+    </a>
+
+    <a href="/upload">
+        Upload CSV
+    </a>
+
+    <a href="/predict">
+        Predict Fraud
+    </a>
+
+    <a href="/history">
+        History
+    </a>
+
+    <a href="/logout">
+        Logout
+    </a>
+
+</div>
+
+<!-- ========================= -->
+<!-- MAIN -->
+<!-- ========================= -->
+
+<div class="main fade">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>
+                Financial Analytics Dashboard
+            </h1>
+
+            <p class="header-subtitle">
+
+                Advanced realtime fraud monitoring
+                and AI security analytics
+
+            </p>
+
+        </div>
+
+        <div class="status-box">
+
+            <span class="pulse-dot"></span>
+
+            System Active
+
+        </div>
+
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+        type="text"
+        id="searchInput"
+        placeholder="Search transactions...">
+
+    </div>
+
+    <!-- HERO SECTION -->
+
+    <div class="chart-box glass hero-box fade">
+
+        <div class="hero-content">
+
+            <div>
+
+                <h2>
+                    Intelligent Fraud Detection
+                </h2>
+
+                <p>
+
+                    FinGuard AI continuously monitors
+                    suspicious transactions, detects
+                    financial anomalies, and provides
+                    realtime business intelligence.
+
+                </p>
+
+            </div>
+
+            <div class="hero-badge">
+
+                <h1>
+                    {{ risk_score }}/10
+                </h1>
+
+                <span>
+                    Risk Score
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- KPI CARDS -->
+
+    <div class="cards">
+
+        <div class="card glass">
+
+            <h2>
+                Total Transactions
+            </h2>
+
+            <h1 class="counter"
+            data-target="{{ total }}">
+                0
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Fraud Cases
+            </h2>
+
+            <h1 class="counter"
+            data-target="{{ fraud }}">
+                0
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Normal Cases
+            </h2>
+
+            <h1 class="counter"
+            data-target="{{ normal }}">
+                0
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Fraud Percentage
+            </h2>
+
+            <h1 class="counter"
+            data-target="{{ percent }}">
+                0
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Total Amount
+            </h2>
+
+            <h1>
+                ${{ total_amount }}
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Average Amount
+            </h2>
+
+            <h1>
+                ${{ avg_amount }}
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Highest Transaction
+            </h2>
+
+            <h1>
+                ${{ max_amount }}
+            </h1>
+
+        </div>
+
+    </div>
+
+    <!-- ADMIN CARDS -->
+
+    <div class="cards">
+
+        <div class="card glass">
+
+            <h2>
+                Total Predictions
+            </h2>
+
+            <h1>
+                {{ total_predictions }}
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Fraud Predictions
+            </h2>
+
+            <h1>
+                {{ fraud_predictions }}
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Detection Accuracy
+            </h2>
+
+            <h1>
+                98.7%
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Threat Level
+            </h2>
+
+            <h1>
+                {{ risk_level }}
+            </h1>
+
+        </div>
+
+    </div>
+
+    <!-- ACTION BOX -->
+
+    <div class="chart-box glass fade">
+
+        <div class="action-box">
+
+            <div>
+
+                <h2>
+                    Export Analytics
+                </h2>
+
+                <p>
+
+                    Download reports and export
+                    transaction intelligence data.
+
+                </p>
+
+            </div>
+
+            <div class="button-group">
+
+                <a href="/download-report">
+
+                    <button class="btn">
+
+                        Download PDF
+
+                    </button>
+
+                </a>
+
+                <a href="/export-excel">
+
+                    <button class="btn secondary-btn">
+
+                        Export Excel
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RISK METER -->
+
+    <div class="chart-box glass fade">
+
+        <h2>
+            Threat Meter
+        </h2>
+
+        <div class="meter-container">
+
+            <div class="meter-fill"
+            style="width:{{ percent * 4 }}%;">
+
+            </div>
+
+        </div>
+
+        <div class="meter-label">
+
+            Current Threat :
+            <span>
+                {{ risk_level }}
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- ALERT -->
+
+    <div class="chart-box glass fade">
+
+        <h2>
+            Live Security Alert
+        </h2>
+
+        <div class="security-alert">
+
+            Suspicious financial monitoring
+            system is enabled across all
+            connected transaction nodes.
+
+        </div>
+
+    </div>
+
+    <!-- PIE CHART -->
+
+    <div class="chart-box glass fade">
+
+        <h2>
+            Fraud Distribution
+        </h2>
+
+        <div id="fraudChart"
+        class="chart-height">
+
+        </div>
+
+    </div>
+
+    <!-- TREND GRAPH -->
+
+    <div class="chart-box glass fade">
+
+        <h2>
+            Weekly Transaction Trend
+        </h2>
+
+        <div id="trendChart"
+        class="chart-height">
+
+        </div>
+
+    </div>
+
+    <!-- HEATMAP -->
+
+    <div class="chart-box glass fade">
+
+        <h2>
+            Fraud Heatmap
+        </h2>
+
+        <div id="heatMap"
+        class="chart-height">
+
+        </div>
+
+    </div>
+
+    <!-- BAR CHART -->
+
+    <div class="chart-box glass fade">
+
+        <h2>
+            Weekly Fraud Analytics
+        </h2>
+
+        <div id="barChart"
+        class="chart-height">
+
+        </div>
+
+    </div>
+
+    <!-- INSIGHTS -->
+
+    <div class="chart-box glass fade">
+
+        <h2>
+            AI Insights
+        </h2>
+
+        <br>
+
+        {% for insight in insights %}
+
+        <div class="insight-box">
+
+            {{ insight }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- RECENT TRANSACTIONS -->
+
+    <div class="chart-box glass fade">
+
+        <div class="table-header">
+
+            <h2>
+                Recent Transactions
+            </h2>
+
+            <span>
+
+                Live Data
+
+            </span>
+
+        </div>
+
+        <br>
+
+        <div class="table-container">
+
+            <table id="transactionTable">
+
+                <tr>
+
+                    <th>
+                        Time
+                    </th>
+
+                    <th>
+                        Amount
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+                {% for row in recent_transactions %}
+
+                <tr>
+
+                    <td>
+                        {{ row.Time }}
+                    </td>
+
+                    <td>
+                        ${{ row.Amount }}
+                    </td>
+
+                    <td>
+
+                        {% if row.Class == 1 %}
+
+                        <span class="fraud-text">
+
+                            Fraud
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="normal-text">
+
+                            Normal
+
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- PIE CHART -->
+<!-- ========================= -->
+
+<script>
+
+Plotly.newPlot(
+
+'fraudChart',
+
+[{
+
+values:[{{ fraud }}, {{ normal }}],
+
+labels:['Fraud','Normal'],
+
+type:'pie',
+
+hole:0.58,
+
+marker:{
+colors:[
+'#00f0ff',
+'#8b5cf6'
+]
+}
+
+}],
+
+{
+
+paper_bgcolor:'rgba(0,0,0,0)',
+
+font:{
+color:'white'
+},
+
+height:430
+
+},
+
+{
+displayModeBar:false
+}
+
+);
+
+</script>
+
+<!-- ========================= -->
+<!-- TREND GRAPH -->
+<!-- ========================= -->
+
+<script>
+
+Plotly.newPlot(
+
+'trendChart',
+
+[{
+
+x: {{ trend_labels|tojson }},
+
+y: {{ trend_values|tojson }},
+
+type:'scatter',
+
+mode:'lines+markers',
+
+line:{
+color:'#00f0ff',
+width:4
+},
+
+marker:{
+size:10,
+color:'#8b5cf6'
+},
+
+fill:'tozeroy',
+
+fillcolor:'rgba(0,240,255,0.08)'
+
+}],
+
+{
+
+paper_bgcolor:'rgba(0,0,0,0)',
+
+font:{
+color:'white'
+},
+
+height:420
+
+},
+
+{
+displayModeBar:false
+}
+
+);
+
+</script>
+
+<!-- ========================= -->
+<!-- HEATMAP -->
+<!-- ========================= -->
+
+<script>
+
+Plotly.newPlot(
+
+'heatMap',
+
+[{
+
+z: {{ heatmap_data|tojson }},
+
+type:'heatmap',
+
+colorscale:'Viridis'
+
+}],
+
+{
+
+paper_bgcolor:'rgba(0,0,0,0)',
+
+plot_bgcolor:'rgba(0,0,0,0)',
+
+font:{
+color:'white'
+},
+
+height:420
+
+},
+
+{
+displayModeBar:false
+}
+
+);
+
+</script>
+
+<!-- ========================= -->
+<!-- BAR CHART -->
+<!-- ========================= -->
+
+<script>
+
+Plotly.newPlot(
+
+'barChart',
+
+[{
+
+x:[
+'Mon',
+'Tue',
+'Wed',
+'Thu',
+'Fri',
+'Sat',
+'Sun'
+],
+
+y: {{ bar_values|tojson }},
+
+type:'bar',
+
+marker:{
+color:'#00f0ff'
+}
+
+}],
+
+{
+
+paper_bgcolor:'rgba(0,0,0,0)',
+
+font:{
+color:'white'
+},
+
+height:420
+
+},
+
+{
+displayModeBar:false
+}
+
+);
+
+</script>
+
+<!-- ========================= -->
+<!-- SEARCH -->
+<!-- ========================= -->
+
+<script>
+
+const searchInput =
+document.getElementById(
+"searchInput"
+);
+
+searchInput.addEventListener(
+
+"keyup",
+
+function(){
+
+let filter =
+searchInput.value.toLowerCase();
+
+let rows =
+document.querySelectorAll(
+"#transactionTable tr"
+);
+
+rows.forEach((row,index)=>{
+
+if(index===0) return;
+
+let text =
+row.innerText.toLowerCase();
+
+row.style.display =
+text.includes(filter)
+? ""
+: "none";
+
+});
+
+}
+
+);
+
+</script>
+
+<!-- ========================= -->
+<!-- LIVE ALERT -->
+<!-- ========================= -->
+
+<script>
+
+setTimeout(()=>{
+
+document.getElementById(
+'liveAlert'
+).style.display='block';
+
+},1500);
+
+setTimeout(()=>{
+
+document.getElementById(
+'liveAlert'
+).style.display='none';
+
+},6500);
+
+</script>
+
+<script src="{{ url_for(
+'static',
+filename='js/main.js'
+) }}"></script>
+
+</body>
+
+</html>

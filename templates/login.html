@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>
+        FinGuard AI Login
+    </title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static',
+    filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<!-- LIVE ALERT -->
+
+<div id="liveAlert" style="
+position:fixed;
+top:20px;
+right:20px;
+z-index:9999;
+
+background:
+linear-gradient(
+135deg,
+#0f172a,
+#1e293b
+);
+
+padding:18px 24px;
+
+border-radius:18px;
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+color:white;
+
+box-shadow:
+0 0 25px rgba(0,0,0,0.35);
+
+display:none;
+">
+
+Secure Authentication Enabled
+
+</div>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        FinGuard AI
+    </div>
+
+    <a href="/">
+        Home
+    </a>
+
+    <a href="/dashboard">
+        Dashboard
+    </a>
+
+    <a href="/upload">
+        Upload CSV
+    </a>
+
+    <a href="/predict">
+        Predict Fraud
+    </a>
+
+    <a href="/history">
+        History
+    </a>
+
+    <a href="/login" class="active">
+        Login
+    </a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main fade">
+
+    <div class="upload-box glass"
+    style="
+    max-width:560px;
+    margin:auto;
+    margin-top:60px;
+    padding:45px;
+    ">
+
+        <!-- TITLE -->
+
+        <h1 style="
+        font-size:38px;
+        margin-bottom:15px;
+
+        background:
+        linear-gradient(
+            to right,
+            #ffffff,
+            #00f0ff,
+            #8b5cf6
+        );
+
+        -webkit-background-clip:text;
+
+        -webkit-text-fill-color:transparent;
+        ">
+
+            Secure Login Portal
+
+        </h1>
+
+        <p style="
+        color:#cbd5e1;
+        line-height:32px;
+        font-size:16px;
+        margin-bottom:38px;
+        ">
+
+            Access realtime fraud analytics,
+            intelligent monitoring systems,
+            financial reports,
+            and advanced AI security tools.
+
+        </p>
+
+        <!-- LOGIN FORM -->
+
+        <form method="POST">
+
+            <!-- USERNAME -->
+
+            <div style="
+            margin-bottom:25px;
+            text-align:left;
+            ">
+
+                <label style="
+                color:#dbeafe;
+                font-size:15px;
+                font-weight:500;
+                ">
+
+                    Username
+
+                </label>
+
+                <br><br>
+
+                <input
+                type="text"
+                name="username"
+                placeholder="Enter your username"
+                required
+
+                style="
+                width:100%;
+                padding:16px;
+
+                border:none;
+                border-radius:16px;
+
+                background:
+                rgba(255,255,255,0.06);
+
+                color:white;
+
+                font-size:15px;
+
+                outline:none;
+
+                border:
+                1px solid rgba(255,255,255,0.08);
+
+                transition:0.35s;
+                ">
+
+            </div>
+
+            <!-- PASSWORD -->
+
+            <div style="
+            margin-bottom:30px;
+            text-align:left;
+            ">
+
+                <label style="
+                color:#dbeafe;
+                font-size:15px;
+                font-weight:500;
+                ">
+
+                    Password
+
+                </label>
+
+                <br><br>
+
+                <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+
+                style="
+                width:100%;
+                padding:16px;
+
+                border:none;
+                border-radius:16px;
+
+                background:
+                rgba(255,255,255,0.06);
+
+                color:white;
+
+                font-size:15px;
+
+                outline:none;
+
+                border:
+                1px solid rgba(255,255,255,0.08);
+
+                transition:0.35s;
+                ">
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button class="btn"
+            style="
+            width:100%;
+            padding:15px;
+            font-size:16px;
+            ">
+
+                Login To Dashboard
+
+            </button>
+
+        </form>
+
+        <!-- DEMO CREDENTIALS -->
+
+        <div style="
+        margin-top:38px;
+
+        padding:22px;
+
+        border-radius:20px;
+
+        background:
+        rgba(255,255,255,0.04);
+
+        border:
+        1px solid rgba(255,255,255,0.08);
+        ">
+
+            <h3 style="
+            color:#00f0ff;
+            margin-bottom:14px;
+            font-size:18px;
+            ">
+
+                Demo Credentials
+
+            </h3>
+
+            <div style="
+            color:#cbd5e1;
+            line-height:34px;
+            font-size:15px;
+            ">
+
+                Username :
+
+                <span style="
+                color:white;
+                font-weight:600;
+                ">
+
+                    admin
+
+                </span>
+
+                <br>
+
+                Password :
+
+                <span style="
+                color:white;
+                font-weight:600;
+                ">
+
+                    1234
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- SECURITY BOX -->
+
+        <div style="
+        margin-top:28px;
+
+        padding:22px;
+
+        border-radius:20px;
+
+        background:
+        rgba(0,240,255,0.05);
+
+        border:
+        1px solid rgba(0,240,255,0.10);
+        ">
+
+            <h3 style="
+            color:#00f0ff;
+            margin-bottom:12px;
+            ">
+
+                Security Status
+
+            </h3>
+
+            <p style="
+            color:#dbeafe;
+            line-height:30px;
+            font-size:15px;
+            ">
+
+                FinGuard AI authentication system
+                is encrypted and actively monitoring
+                login activity in realtime.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- LIVE ALERT -->
+
+<script>
+
+setTimeout(()=>{
+
+document.getElementById(
+'liveAlert'
+).style.display='block';
+
+},1500);
+
+setTimeout(()=>{
+
+document.getElementById(
+'liveAlert'
+).style.display='none';
+
+},5500);
+
+</script>
+
+<script src="{{ url_for('static',
+filename='js/main.js') }}"></script>
+
+</body>
+</html>

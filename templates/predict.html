@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>
+        FinGuard AI - Fraud Prediction
+    </title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        FinGuard AI
+    </div>
+
+    <a href="/">
+        Home
+    </a>
+
+    <a href="/dashboard">
+        Dashboard
+    </a>
+
+    <a href="/upload">
+        Upload CSV
+    </a>
+
+    <a href="/predict" class="active">
+        Predict Fraud
+    </a>
+
+    <a href="/history">
+        History
+    </a>
+
+    <a href="/logout">
+        Logout
+    </a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main fade">
+
+    <!-- PAGE HEADER -->
+
+    <div class="header">
+
+        <h1>
+            AI Fraud Prediction Center
+        </h1>
+
+    </div>
+
+    <!-- TOP INFO CARDS -->
+
+    <div class="cards">
+
+        <div class="card glass">
+
+            <h2>
+                Prediction Engine
+            </h2>
+
+            <h1>
+                Active
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                AI Accuracy
+            </h2>
+
+            <h1>
+                98.7%
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                System Security
+            </h2>
+
+            <h1>
+                Secure
+            </h1>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN PREDICTION BOX -->
+
+    <div class="chart-box glass fade"
+    style="
+    max-width:850px;
+    margin:auto;
+    margin-top:30px;
+    ">
+
+        <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        flex-wrap:wrap;
+        gap:20px;
+        ">
+
+            <div>
+
+                <h2>
+                    Manual Transaction Analysis
+                </h2>
+
+                <br>
+
+                <p style="
+                color:#cbd5e1;
+                line-height:30px;
+                font-size:15px;
+                ">
+
+                    Enter transaction details below to let
+                    the FinGuard AI engine analyze fraud risk,
+                    suspicious behavior,
+                    and financial anomalies in realtime.
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <div style="
+                width:90px;
+                height:90px;
+
+                border-radius:50%;
+
+                display:flex;
+                align-items:center;
+                justify-content:center;
+
+                background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,240,255,0.15),
+                    rgba(139,92,246,0.18)
+                );
+
+                border:
+                1px solid rgba(255,255,255,0.08);
+
+                box-shadow:
+                0 0 25px rgba(0,240,255,0.15);
+                ">
+
+                    <span style="
+                    font-size:34px;
+                    ">
+                        AI
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <br><br>
+
+        <!-- FORM -->
+
+        <form method="POST">
+
+            <!-- AMOUNT -->
+
+            <div style="
+            margin-bottom:24px;
+            ">
+
+                <label style="
+                color:#dbeafe;
+                font-size:15px;
+                ">
+
+                    Transaction Amount
+
+                </label>
+
+                <br><br>
+
+                <input
+                type="number"
+                step="0.01"
+                name="amount"
+
+                placeholder="Enter transaction amount"
+
+                required
+
+                style="
+                width:100%;
+                padding:16px;
+
+                border:none;
+                border-radius:16px;
+
+                background:
+                rgba(255,255,255,0.07);
+
+                color:white;
+
+                font-size:16px;
+
+                outline:none;
+
+                border:
+                1px solid rgba(255,255,255,0.08);
+                ">
+
+            </div>
+
+            <!-- TIME -->
+
+            <div style="
+            margin-bottom:30px;
+            ">
+
+                <label style="
+                color:#dbeafe;
+                font-size:15px;
+                ">
+
+                    Transaction Time
+
+                </label>
+
+                <br><br>
+
+                <input
+                type="number"
+                step="0.01"
+                name="time"
+
+                placeholder="Enter transaction time"
+
+                required
+
+                style="
+                width:100%;
+                padding:16px;
+
+                border:none;
+                border-radius:16px;
+
+                background:
+                rgba(255,255,255,0.07);
+
+                color:white;
+
+                font-size:16px;
+
+                outline:none;
+
+                border:
+                1px solid rgba(255,255,255,0.08);
+                ">
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button class="btn"
+            style="
+            width:100%;
+            padding:16px;
+            font-size:16px;
+            ">
+
+                Run AI Detection
+
+            </button>
+
+        </form>
+
+        <!-- RESULT -->
+
+        {% if result %}
+
+        <br><br>
+
+        {% if result == "Fraud Transaction" %}
+
+        <div style="
+        padding:24px;
+
+        border-radius:22px;
+
+        background:
+        rgba(255,77,109,0.08);
+
+        border:
+        1px solid rgba(255,77,109,0.18);
+
+        box-shadow:
+        0 0 25px rgba(255,77,109,0.08);
+        ">
+
+            <h2 style="
+            color:#ff4d6d;
+            margin-bottom:12px;
+            ">
+
+                Fraud Detected
+
+            </h2>
+
+            <p style="
+            color:#ffd6de;
+            line-height:30px;
+            font-size:16px;
+            ">
+
+                The AI engine identified suspicious
+                transaction behavior and flagged
+                this activity as potentially fraudulent.
+
+            </p>
+
+        </div>
+
+        {% elif result == "Normal Transaction" %}
+
+        <div style="
+        padding:24px;
+
+        border-radius:22px;
+
+        background:
+        rgba(0,255,159,0.08);
+
+        border:
+        1px solid rgba(0,255,159,0.18);
+
+        box-shadow:
+        0 0 25px rgba(0,255,159,0.08);
+        ">
+
+            <h2 style="
+            color:#00ff9f;
+            margin-bottom:12px;
+            ">
+
+                Safe Transaction
+
+            </h2>
+
+            <p style="
+            color:#d1ffe9;
+            line-height:30px;
+            font-size:16px;
+            ">
+
+                The AI model analyzed the transaction
+                and found no major fraud indicators.
+
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <div style="
+        padding:24px;
+
+        border-radius:22px;
+
+        background:
+        rgba(255,255,255,0.05);
+
+        border:
+        1px solid rgba(255,255,255,0.08);
+        ">
+
+            <h2 style="
+            color:#00f0ff;
+            margin-bottom:12px;
+            ">
+
+                Prediction Result
+
+            </h2>
+
+            <p style="
+            color:#dbeafe;
+            line-height:30px;
+            font-size:16px;
+            ">
+
+                {{ result }}
+
+            </p>
+
+        </div>
+
+        {% endif %}
+
+        {% endif %}
+
+    </div>
+
+    <!-- INFO SECTION -->
+
+    <div class="cards">
+
+        <div class="card glass">
+
+            <h2>
+                Realtime Analysis
+            </h2>
+
+            <p style="
+            margin-top:15px;
+            color:#cbd5e1;
+            line-height:28px;
+            ">
+
+                Every transaction is instantly processed
+                using intelligent fraud monitoring logic.
+
+            </p>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                AI Monitoring
+            </h2>
+
+            <p style="
+            margin-top:15px;
+            color:#cbd5e1;
+            line-height:28px;
+            ">
+
+                FinGuard AI continuously evaluates
+                transaction behavior patterns
+                for financial security.
+
+            </p>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Threat Detection
+            </h2>
+
+            <p style="
+            margin-top:15px;
+            color:#cbd5e1;
+            line-height:28px;
+            ">
+
+                Advanced fraud scoring helps identify
+                abnormal activity before financial damage occurs.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static',
+filename='js/main.js') }}"></script>
+
+</body>
+</html>

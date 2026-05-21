@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>
+        FinGuard AI - Upload Dataset
+    </title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static',
+    filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        FinGuard AI
+    </div>
+
+    <a href="/">
+        Home
+    </a>
+
+    <a href="/dashboard">
+        Dashboard
+    </a>
+
+    <a href="/upload" class="active">
+        Upload CSV
+    </a>
+
+    <a href="/predict">
+        Predict Fraud
+    </a>
+
+    <a href="/history">
+        History
+    </a>
+
+    <a href="/logout">
+        Logout
+    </a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main fade">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+            CSV Fraud Detection Center
+        </h1>
+
+    </div>
+
+    <!-- TOP STATUS CARDS -->
+
+    <div class="cards">
+
+        <div class="card glass">
+
+            <h2>
+                Upload Engine
+            </h2>
+
+            <h1>
+                Ready
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                File Support
+            </h2>
+
+            <h1>
+                CSV
+            </h1>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                AI Scanner
+            </h2>
+
+            <h1>
+                Active
+            </h1>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN UPLOAD BOX -->
+
+    <div class="chart-box glass fade"
+    style="
+    max-width:950px;
+    margin:auto;
+    margin-top:30px;
+    ">
+
+        <!-- TOP SECTION -->
+
+        <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        flex-wrap:wrap;
+        gap:25px;
+        ">
+
+            <div>
+
+                <h2>
+                    Upload Transaction Dataset
+                </h2>
+
+                <br>
+
+                <p style="
+                color:#cbd5e1;
+                line-height:32px;
+                font-size:16px;
+                max-width:700px;
+                ">
+
+                    Upload a transaction CSV dataset
+                    to analyze suspicious activities,
+                    detect fraud patterns,
+                    generate AI predictions,
+                    and monitor financial threats
+                    using FinGuard AI.
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <div style="
+                width:100px;
+                height:100px;
+
+                border-radius:50%;
+
+                display:flex;
+                align-items:center;
+                justify-content:center;
+
+                background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,240,255,0.15),
+                    rgba(139,92,246,0.15)
+                );
+
+                border:
+                1px solid rgba(255,255,255,0.08);
+
+                box-shadow:
+                0 0 30px rgba(0,240,255,0.12);
+                ">
+
+                    <span style="
+                    font-size:38px;
+                    ">
+                        CSV
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <br><br>
+
+        <!-- UPLOAD FORM -->
+
+        <form method="POST"
+        enctype="multipart/form-data">
+
+            <div style="
+            padding:30px;
+
+            border-radius:24px;
+
+            background:
+            rgba(255,255,255,0.04);
+
+            border:
+            1px dashed rgba(255,255,255,0.12);
+
+            text-align:center;
+            ">
+
+                <h3 style="
+                margin-bottom:20px;
+                color:#dbeafe;
+                ">
+
+                    Select CSV File
+
+                </h3>
+
+                <input
+                type="file"
+                name="file"
+                accept=".csv"
+                required
+
+                style="
+                width:100%;
+                max-width:500px;
+
+                padding:16px;
+
+                border:none;
+                border-radius:16px;
+
+                background:
+                rgba(255,255,255,0.06);
+
+                color:white;
+
+                font-size:15px;
+
+                outline:none;
+
+                border:
+                1px solid rgba(255,255,255,0.08);
+                ">
+
+                <br><br><br>
+
+                <button class="btn"
+                style="
+                padding:15px 35px;
+                font-size:16px;
+                ">
+
+                    Run AI Detection
+
+                </button>
+
+            </div>
+
+        </form>
+
+        <!-- RESULT SECTION -->
+
+        {% if result %}
+
+        <br><br>
+
+        <div style="
+        padding:30px;
+
+        border-radius:24px;
+
+        background:
+        rgba(0,240,255,0.05);
+
+        border:
+        1px solid rgba(0,240,255,0.12);
+
+        box-shadow:
+        0 0 30px rgba(0,240,255,0.06);
+        ">
+
+            <h2 style="
+            color:#00f0ff;
+            margin-bottom:20px;
+            ">
+
+                AI Analysis Result
+
+            </h2>
+
+            <pre style="
+            white-space:pre-wrap;
+            color:#dbeafe;
+            line-height:34px;
+            font-size:16px;
+            font-family:'Poppins',sans-serif;
+            ">
+
+{{ result }}
+
+            </pre>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- FEATURE CARDS -->
+
+    <div class="cards">
+
+        <div class="card glass">
+
+            <h2>
+                Realtime Processing
+            </h2>
+
+            <p style="
+            margin-top:15px;
+            color:#cbd5e1;
+            line-height:28px;
+            ">
+
+                Uploaded datasets are instantly analyzed
+                using the fraud prediction engine.
+
+            </p>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Intelligent Detection
+            </h2>
+
+            <p style="
+            margin-top:15px;
+            color:#cbd5e1;
+            line-height:28px;
+            ">
+
+                Machine learning algorithms identify
+                suspicious financial patterns automatically.
+
+            </p>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>
+                Secure Upload
+            </h2>
+
+            <p style="
+            margin-top:15px;
+            color:#cbd5e1;
+            line-height:28px;
+            ">
+
+                FinGuard AI securely processes transaction
+                datasets without exposing sensitive data.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- EXTRA INFO -->
+
+    <div class="chart-box glass fade">
+
+        <h2>
+            CSV File Requirements
+        </h2>
+
+        <br>
+
+        <div style="
+        display:grid;
+        grid-template-columns:
+        repeat(auto-fit,minmax(240px,1fr));
+
+        gap:20px;
+        ">
+
+            <div style="
+            padding:20px;
+
+            border-radius:18px;
+
+            background:
+            rgba(255,255,255,0.04);
+
+            border:
+            1px solid rgba(255,255,255,0.08);
+            ">
+
+                <h3 style="
+                color:#00f0ff;
+                margin-bottom:12px;
+                ">
+
+                    Supported Format
+
+                </h3>
+
+                <p style="
+                color:#cbd5e1;
+                line-height:28px;
+                ">
+
+                    Only CSV transaction files
+                    are supported for upload.
+
+                </p>
+
+            </div>
+
+            <div style="
+            padding:20px;
+
+            border-radius:18px;
+
+            background:
+            rgba(255,255,255,0.04);
+
+            border:
+            1px solid rgba(255,255,255,0.08);
+            ">
+
+                <h3 style="
+                color:#8b5cf6;
+                margin-bottom:12px;
+                ">
+
+                    Required Columns
+
+                </h3>
+
+                <p style="
+                color:#cbd5e1;
+                line-height:28px;
+                ">
+
+                    Dataset should include
+                    transaction features
+                    and Class column.
+
+                </p>
+
+            </div>
+
+            <div style="
+            padding:20px;
+
+            border-radius:18px;
+
+            background:
+            rgba(255,255,255,0.04);
+
+            border:
+            1px solid rgba(255,255,255,0.08);
+            ">
+
+                <h3 style="
+                color:#00ff9f;
+                margin-bottom:12px;
+                ">
+
+                    AI Monitoring
+
+                </h3>
+
+                <p style="
+                color:#cbd5e1;
+                line-height:28px;
+                ">
+
+                    FinGuard AI continuously scans
+                    uploaded transactions for fraud.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static',
+filename='js/main.js') }}"></script>
+
+</body>
+</html>
