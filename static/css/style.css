@@ -1069,3 +1069,28 @@ tr:hover{
         padding:18px;
     }
 }
+@media screen and (max-width: 768px) {
+
+    .container{
+        width: 95%;
+        padding: 10px;
+    }
+
+    .card{
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    table{
+        display: block;
+        overflow-x: auto;
+    }
+
+    h1,h2,h3{
+        font-size: 18px;
+    }
+
+    button{
+        width: 100%;
+    }
+}
