@@ -128,9 +128,15 @@ PASSWORD = "1234"
 # ==========================================
 
 DATASET_PATH = os.path.join(
-    DATASET_FOLDER,
-    "creditcard.csv"
+    UPLOAD_FOLDER,
+    "sample_creditcard.csv"
 )
+
+if not os.path.exists(DATASET_PATH):
+    DATASET_PATH = os.path.join(
+        DATASET_FOLDER,
+        "creditcard.csv"
+    )
 
 df = pd.read_csv(DATASET_PATH)
 
@@ -493,6 +499,15 @@ def upload():
 
                 X = new_df
 
+            # Keep only numeric columns and align standard credit-card feature order
+            expected_columns = ["Time"] + [f"V{i}" for i in range(1, 29)] + ["Amount"]
+
+            if all(col in X.columns for col in expected_columns):
+
+                X = X[expected_columns]
+
+            X = X.select_dtypes(include=["number"])
+
             predictions = model.predict(X)
 
             fraud_count = int(sum(predictions))
@@ -588,11 +603,13 @@ def predict():
 
             features = [[
 
-                time,
+                time
+
+            ] + [0] * 28 + [
 
                 amount
 
-            ] + [0] * 28]
+            ]]
 
             prediction = model.predict(
                 features
