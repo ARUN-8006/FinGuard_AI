@@ -1071,26 +1071,60 @@ tr:hover{
 }
 @media screen and (max-width: 768px) {
 
-    .container{
-        width: 95%;
-        padding: 10px;
+    body{
+        overflow-x: hidden;
     }
 
-    .card{
-        width: 100%;
-        margin-bottom: 15px;
+    .container,
+    .dashboard-container,
+    .main-container,
+    .content{
+        width: 95% !important;
+        padding: 10px !important;
+        margin: auto !important;
+    }
+
+    .card,
+    .box,
+    .stat-card{
+        width: 100% !important;
+        margin-bottom: 15px !important;
     }
 
     table{
         display: block;
+        width: 100%;
         overflow-x: auto;
     }
 
-    h1,h2,h3{
-        font-size: 18px;
+    input,
+    select,
+    textarea,
+    button{
+        width: 100% !important;
+        margin-bottom: 10px;
     }
 
-    button{
-        width: 100%;
+    h1{
+        font-size: 24px !important;
+    }
+
+    h2{
+        font-size: 20px !important;
+    }
+
+    h3{
+        font-size: 18px !important;
+    }
+
+    nav,
+    .navbar{
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    img{
+        max-width: 100%;
+        height: auto;
     }
 }
